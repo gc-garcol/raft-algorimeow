@@ -7,6 +7,4 @@ package gc.garcol.raftcore;
  * @page 4
  */
 public interface RARule {
-    interface Input {}
-    interface Output {}
 }

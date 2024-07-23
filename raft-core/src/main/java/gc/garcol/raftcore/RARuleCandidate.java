@@ -1,7 +1,5 @@
 package gc.garcol.raftcore;
 
-import java.util.function.Consumer;
-
 /**
  * @author thaivc
  * @since 2024
@@ -20,14 +18,14 @@ public interface RARuleCandidate extends RARule {
      *
      * @rule 1
      */
-    <T extends Input> Consumer<T> electOnConversionToCandidate();
+    RAExecutable electOnConversionToCandidate();
 
     /**
      * If votes received from the majority of servers: become leader
      *
      * @rule 2
      */
-    <T extends Input> Consumer<T> receiveMajorityVotes();
+    RAExecutable receiveMajorityVotes();
 
     /**
      * If AppendEntries RPC received from new leader: convert to
@@ -35,13 +33,13 @@ public interface RARuleCandidate extends RARule {
      *
      * @rule 3
      */
-    <T extends Input> Consumer<T> receiveAppendEntriesRPCFromNewLeader();
+    RAExecutable receiveAppendEntriesRPCFromNewLeader();
 
     /**
      * If election timeout elapses: start new election
      *
      * @rule 4
      */
-    <T extends Input> Consumer<T> electionTimeoutElapse();
+    RAExecutable electionTimeoutElapse();
 
 }

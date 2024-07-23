@@ -1,6 +1,5 @@
 package gc.garcol.raftcore;
 
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -16,7 +15,7 @@ public interface RARuleAllServer extends RARule {
      *
      * @rule 1
      */
-    <T extends Input> Consumer<T> applyNewAvailableSafeLogs();
+    RAExecutable applyNewAvailableSafeLogs();
 
     default Predicate<RAStateVolatile> hasAvailableSafeLogs() {
         return state -> state.getCommitIndex() > state.getLastApplied();
@@ -28,6 +27,6 @@ public interface RARuleAllServer extends RARule {
      *
      * @rule 2
      */
-    <T extends Input> Consumer<T> updateTermAndBecomeFollower();
+    RAExecutable updateTermAndBecomeFollower();
 
 }

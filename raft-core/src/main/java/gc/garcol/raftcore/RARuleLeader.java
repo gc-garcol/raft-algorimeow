@@ -1,8 +1,5 @@
 package gc.garcol.raftcore;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 /**
  * @author thaivc
  * @since 2024
@@ -16,7 +13,7 @@ public interface RARuleLeader extends RARule {
      *
      * @rule 1
      */
-    <T extends Input> Consumer<T> uponElection();
+    RAExecutable uponElection();
 
     /**
      * If command received from client: append entry to local log,
@@ -24,7 +21,7 @@ public interface RARuleLeader extends RARule {
      *
      * @rule 2
      */
-    <T extends Input> Consumer<T> onReceiveClientCommand();
+    RAExecutable onReceiveClientCommand();
 
     /**
      * If last log index ≥ nextIndex for a follower: send
@@ -39,7 +36,7 @@ public interface RARuleLeader extends RARule {
      *
      * @rule 3
      */
-    <T extends Input> Consumer<T> sendAppendEntriesRPCToFollower();
+    RAExecutable sendAppendEntriesRPCToFollower();
 
     /**
      * If there exists an N such that N > commitIndex, a majority
@@ -48,6 +45,6 @@ public interface RARuleLeader extends RARule {
      *
      * @rule 4
      */
-    <T extends Input> Consumer<T> updateLeaderCommitIndex();
+    RAExecutable updateLeaderCommitIndex();
 
 }
